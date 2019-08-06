@@ -7,6 +7,8 @@ import {Link as RouterLink} from 'react-router-dom';
 import {getAllPosts} from '../../services/posts.data.service';
 
 const Feed: React.FC = () => {
+  // updateRequired value is updates counter - just to force re-render (can be done with empty object as well)
+  const [updateRequired, setUpdateRequired] = useState(0);
   const [posts, setPosts] = useState();
   
   useEffect(() => {
@@ -15,11 +17,11 @@ const Feed: React.FC = () => {
       setPosts(result);
     };
     getPosts();
-  }, []);
+  }, [updateRequired]);
   
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={8}>
+    <Grid container justify="center">
+      <Grid item xs={10}>
         <RouterLink to={`/new-post/`}>
           <Box m={3}>
             <Button variant="contained" color="primary">
@@ -29,9 +31,10 @@ const Feed: React.FC = () => {
         </RouterLink>
 
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={10}>
         {
-          posts && posts.map((p: any) => <PostCard key={p.id} post={p}/>)
+          posts && posts.map((p: any) => <PostCard key={p.id} post={p}
+                                                   afterDelete={() => setUpdateRequired(updateRequired + 1)}/>)
         }
       </Grid>
     </Grid>

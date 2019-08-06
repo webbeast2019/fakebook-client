@@ -32,5 +32,4 @@ export function deletePost(id: number): Promise<any> {
   return fetch(`${baseURL}/posts/${id}`,{
     method: 'DELETE',
   })
-    .then(res => res.json())
 }

@@ -32,6 +32,8 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   
   const onSubmit = (formData: FormData) => {
     if (isEdit) {
+    
+    } else {
       // creating new post
       createPost(formData).then(() => {
         setRedirectToFeed(true);
@@ -40,7 +42,7 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   };
   
   if (redirectToFeed) {
-    return <Redirect to="/feed" />;
+    return <Redirect to="/" />;
   }
   
   return (

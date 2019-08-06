@@ -8,11 +8,13 @@ import {IPost} from '../models/IPost';
 
 interface IProps {
   post: IPost;
+  afterDelete: Function
 }
 
-const PostCard: React.FC<IProps> = ({post}) => {
+const PostCard: React.FC<IProps> = ({post, afterDelete}) => {
   const deleteMe = () => {
     deletePost(post.id)
+      .then(() => afterDelete()); // notify parent data has changed
   };
   
   return (
