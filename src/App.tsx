@@ -4,16 +4,16 @@ import {ThemeProvider} from '@material-ui/styles';
 import Header from './components/Header';
 import {Route, Switch} from 'react-router';
 import Feed from './pages/Feed/Feed';
-import PostPage from './pages/Profile/PostPage';
+import PostPage from './pages/PostPage/PostPage';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 const App: React.FC = () => {
   const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#104DA1'
-      }
-    },
+    // palette: {
+    //   primary: {
+        // main: '#7aff6b'
+      // }
+    // },
   });
   
   return (
