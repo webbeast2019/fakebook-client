@@ -20,8 +20,10 @@ export function createPost(formData: FormData): Promise<IPost> {
     .then(res => res.json())
 }
 
-export function updatePost(formData: FormData): Promise<IPost> {
-  return fetch(`${baseURL}/posts/`,{
+export function updatePost(id: number, formData: FormData): Promise<IPost> {
+  formData.append('id', id.toString()); // add id to body
+  
+  return fetch(`${baseURL}/posts/${id}`,{
     method: 'PUT',
     body: formData
   })
