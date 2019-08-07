@@ -1,5 +1,6 @@
 import {IPost} from '../models/IPost';
 const baseURL = 'http://localhost:4000/api';
+export const imagesBaseURL = 'http://localhost:4000/images';
 
 export function getAllPosts(): Promise<IPost> {
   return fetch(`${baseURL}/posts`)

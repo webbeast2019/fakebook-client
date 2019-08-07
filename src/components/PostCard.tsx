@@ -1,17 +1,32 @@
 import React from 'react';
-import {Card, CardContent, Typography} from '@material-ui/core';
+import {Card, CardContent, createStyles, Theme, Typography} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import {Link as RouterLink} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import {deletePost} from '../services/posts.data.service';
+import {deletePost, imagesBaseURL} from '../services/posts.data.service';
 import {IPost} from '../models/IPost';
+import CardMedia from '@material-ui/core/CardMedia';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 interface IProps {
   post: IPost;
   afterDelete: Function
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    media: {
+      height: 300,
+      width: 'auto',
+      margin: 'auto',
+      marginTop: theme.spacing(2)
+    }
+  })
+);
+
 const PostCard: React.FC<IProps> = ({post, afterDelete}) => {
+  const classes = useStyles();
+  
   const deleteMe = () => {
     deletePost(post.id)
       .then(() => afterDelete()); // notify parent data has changed
@@ -34,7 +49,10 @@ const PostCard: React.FC<IProps> = ({post, afterDelete}) => {
             <Typography variant="h5" color="textSecondary" component="p">
               {post.text}
             </Typography>
-            {/*<CardMedia image={post.imgSrc}/>*/}
+            {
+              post.image &&
+              <CardMedia component="img" image={`${imagesBaseURL}/${post.image}`} className={classes.media} />
+            }
           </CardContent>
         </Card>
     </Box>
