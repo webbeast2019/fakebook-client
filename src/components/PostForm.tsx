@@ -61,6 +61,8 @@ const PostForm: React.FC<IProps> = ({post, onSubmit}) => {
         multiline
         rowsMax="20"
         margin="normal"
+        required
+        inputProps={{ minLength:3, maxLength:4000}}
         fullWidth
       />
       

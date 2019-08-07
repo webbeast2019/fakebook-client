@@ -54,8 +54,8 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   return (
     <Box p={5}>
       {
-        errMsg.map((msg: string, i:number) =>
-          <p key={i} style={{color: 'red'}}>{msg}</p>
+        errMsg && errMsg.map((message: string, i:number) =>
+          <p key={i} style={{color: 'red'}}>{message}</p>
         )
       }
       {
