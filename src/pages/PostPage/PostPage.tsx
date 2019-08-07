@@ -13,6 +13,7 @@ export type RParams = { id: string };
 
 const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   const [redirectToFeed, setRedirectToFeed] = useState(false);
+  const [errMsg, setErrMsg] = useState([] as string[]);
   const [post, setPost] = useState();
   const isEdit = match.path.includes('edit-post');
   const postId = (isEdit) ? parseInt(match.params.id) : -1;
@@ -33,12 +34,17 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   const onSubmit = (formData: FormData) => {
     // after finish with submit action - redirect to home page
     const afterAction = () => setRedirectToFeed(true);
-    
-    if (isEdit) {
-      updatePost(postId, formData).then(afterAction);
-    } else {
-      createPost(formData).then(afterAction);
-    }
+    const request = (isEdit) ? updatePost(postId, formData) : createPost(formData);
+
+    request
+      .then(afterAction)
+      .catch(
+        req => req.json().then(
+          (err: {error: Array<string>}) => {
+            console.log(err);
+            setErrMsg(err.error);
+          })
+      );
   };
   
   if (redirectToFeed) {
@@ -47,6 +53,11 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   
   return (
     <Box p={5}>
+      {
+        errMsg.map((msg: string, i:number) =>
+          <p key={i} style={{color: 'red'}}>{msg}</p>
+        )
+      }
       {
         canRenderForm &&
         <PostForm post={post} onSubmit={onSubmit}/>
