@@ -7,7 +7,7 @@ export function getAllPosts(): Promise<IPost> {
     .then(res => res.json())
 }
 
-export function getPost(id: number): Promise<IPost> {
+export function getPost(id: string): Promise<IPost> {
   return fetch(`${baseURL}/posts/${id}`)
     .then(res => res.json())
 }
@@ -22,8 +22,8 @@ export function createPost(formData: FormData): Promise<IPost | Request> {
     })
 }
 
-export function updatePost(id: number, formData: FormData): Promise<IPost | Request> {
-  formData.append('id', id.toString()); // add id to body
+export function updatePost(id: string, formData: FormData): Promise<IPost | Request> {
+  formData.append('_id', id); // add id to body
   
   return fetch(`${baseURL}/posts/${id}`, {
     method: 'PUT',

@@ -33,7 +33,7 @@ const Feed: React.FC = () => {
       </Grid>
       <Grid item xs={10}>
         {
-          posts && posts.map((p: any) => <PostCard key={p.id} post={p}
+          posts && posts.map((p: any) => <PostCard key={p._id} post={p}
                                                    afterDelete={() => setUpdateRequired(updateRequired + 1)}/>)
         }
       </Grid>

@@ -16,7 +16,7 @@ const PostPage: React.FC<IProps & RouteComponentProps<RParams>> = ({match}) => {
   const [errMsg, setErrMsg] = useState([] as string[]);
   const [post, setPost] = useState();
   const isEdit = match.path.includes('edit-post');
-  const postId = (isEdit) ? parseInt(match.params.id) : -1;
+  const postId = (isEdit) ? match.params.id : '';
   const canRenderForm = !isEdit || (isEdit && post);  // if edit page - wait for post data
   
   useEffect(() => {

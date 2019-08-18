@@ -28,13 +28,13 @@ const PostCard: React.FC<IProps> = ({post, afterDelete}) => {
   const classes = useStyles();
   
   const deleteMe = () => {
-    deletePost(post.id)
+    deletePost(post._id)
       .then(() => afterDelete()); // notify parent data has changed
   };
   
   return (
     <Box p={3}>
-      <RouterLink to={`/edit-post/${post.id}`}>
+      <RouterLink to={`/edit-post/${post._id}`}>
         <Button variant="contained" color="primary">
           Edit
         </Button>
